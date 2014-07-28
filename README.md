@@ -18,27 +18,27 @@ Or install it yourself as:
 
 ## Usage
 
-Global configuration: 
-  
+Global configuration:
+
     CloudFivePush.api_key = "my_api_key"
 
-Sending a notification immediately to all your users: 
+Sending a notification immediately to all your users:
 
     CloudFivePush.broadcast! "Hello from Cloud Five!"
 
-Send a notification to just some of your users: 
+Send a notification to just some of your users:
 
-    message = CloudFivePush::Message.new
-    message.message = "Hello from Cloud Five"
-    message.user_identifiers = [123, 345, "something@example.com"] # use whatever you registered with on the mobile app
-    message.send!
+    notification = CloudFivePush::Notification.new
+    notification.alert = "Hello from Cloud Five"
+    notification.user_identifiers = [123, 345, "something@example.com"] # Use whatever you registered with on the mobile app
+    notification.notify!
 
-Schedule a notification to be sent in the future: 
+Schedule a notification to be sent in the future:
 
-    message = CloudFivePush::Message.new
-    message.message = "Hello from Cloud Five"
-    message.scheduled_at = Time.now + 3600 # 1 hour from now
-    message.send!
+    notification = CloudFivePush::Notification.new
+    notification.alert = "Hello from Cloud Five"
+    notification.scheduled_at = Time.now + 3600 # 1 hour from now
+    notification.notify!
 
 ## Contributing
 

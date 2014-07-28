@@ -16,7 +16,7 @@ module CloudFivePush
       @user_identifiers = []
     end
 
-    def send!
+    def notify!
       if blank_param?(@user_identifiers) && (@broadcast == false)
         raise "Please set user_identifiers or set broadcast=true"
       end
@@ -28,13 +28,9 @@ module CloudFivePush
         alert: @alert,
         badge: @badge
       }
-      if @message
-        params[:message] = @message
-      end
 
-      if @scheduled_at
-        params[:when] = @scheduled_at.iso8601
-      end
+      params[:message] = @message if @message
+      params[:when] = @scheduled_at.iso8601 if @scheduled_at
 
       if @broadcast
         params[:audience] = "broadcast"

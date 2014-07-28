@@ -15,6 +15,6 @@ module CloudFivePush
     notification = CloudFivePush::Notification.new
     notification.broadcast = true
     notification.alert = alert
-    notification.send!
+    notification.notify!
   end
 end
