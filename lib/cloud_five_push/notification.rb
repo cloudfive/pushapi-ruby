@@ -1,7 +1,7 @@
 require 'httparty'
 module CloudFivePush
-  class Message
-    attr_accessor :user_identifiers, :message, :badge, :scheduled_at, :broadcast, :api_key
+  class Notification
+    attr_accessor :user_identifiers, :alert, :message, :badge, :scheduled_at, :broadcast, :api_key
 
     include HTTParty
     base_uri 'https://www.cloudfiveapp.com'
@@ -20,14 +20,18 @@ module CloudFivePush
       if blank_param?(@user_identifiers) && (@broadcast == false)
         raise "Please set user_identifiers or set broadcast=true"
       end
-      if blank_param?(@message) && blank_param?(@badge)
-        raise "Please set message or badge"
+      if blank_param?(@alert) && blank_param?(@badge)
+        raise "Please set alert or badge"
       end
       params = {
         api_key: @api_key,
-        alert: @message,
+        alert: @alert,
         badge: @badge
       }
+      if @message
+        params[:message] = @message
+      end
+
       if @scheduled_at
         params[:when] = @scheduled_at.iso8601
       end

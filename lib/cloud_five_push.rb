@@ -1,5 +1,5 @@
 require "cloud_five_push/version"
-require "cloud_five_push/message"
+require "cloud_five_push/notification"
 
 module CloudFivePush
   @api_key = nil
@@ -11,10 +11,10 @@ module CloudFivePush
     @api_key
   end
 
-  def self.broadcast!(message)
-    m = CloudFivePush::Message.new
-    m.broadcast = true
-    m.message = message
-    m.send!
+  def self.broadcast!(alert)
+    notification = CloudFivePush::Notification.new
+    notification.broadcast = true
+    notification.alert = alert
+    notification.send!
   end
 end
