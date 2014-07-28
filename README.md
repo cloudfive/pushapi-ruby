@@ -28,6 +28,10 @@ Sending a notification immediately to all your users:
 
 Send a notification to just some of your users:
 
+    CloudFivePush.notify! "Hello from Cloud Five!", 'the-user-identifier'
+
+    CloudFivePush.notify! "Hello from Cloud Five!", ['one', 'another', 'the-third']
+
     notification = CloudFivePush::Notification.new
     notification.alert = "Hello from Cloud Five"
     notification.user_identifiers = [123, 345, "something@example.com"] # Use whatever you registered with on the mobile app
@@ -35,9 +39,14 @@ Send a notification to just some of your users:
 
 Schedule a notification to be sent in the future:
 
+    CloudFivePush.broadcast! "Hello, everybody", Time.now + 3600 # 1 hour from now
+
+    CloudFivePush.notify! "Hello from Cloud Five!", 'the-user-identifier', Time.now + 3600
+
     notification = CloudFivePush::Notification.new
     notification.alert = "Hello from Cloud Five"
-    notification.scheduled_at = Time.now + 3600 # 1 hour from now
+    notification.user_identifiers = [123, 345, "something@example.com"]
+    notification.scheduled_at = Time.now + 3600
     notification.notify!
 
 ## Contributing
