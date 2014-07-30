@@ -23,7 +23,7 @@ module CloudFivePush
       if blank_param?(@alert) && blank_param?(@badge)
         raise "Please set alert or badge"
       end
-      if @broadcast && !blank_param?(@user_identifers)
+      if @broadcast && !blank_param?(@user_identifiers)
         raise "Can't both broadcast and set user_identifiers"
       end
 
@@ -45,8 +45,8 @@ module CloudFivePush
       self.class.post('/push/notify', body: params)
     end
 
-    def user_identifiers=(user_identifers)
-      @user_identifers = [user_identifers].flatten
+    def user_identifiers=(user_identifiers)
+      @user_identifiers = [user_identifiers].flatten
     end
 
     private
