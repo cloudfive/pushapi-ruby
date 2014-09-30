@@ -49,6 +49,14 @@ Schedule a notification to be sent in the future:
     notification.scheduled_at = Time.now + 3600
     notification.notify!
 
+Send a notification with custom json payload
+
+    notification = CloudFivePush::Notification.new
+    notification.alert = "Check out this foo"
+    notification.user_identifiers = 123
+    notification.data = {foo: "bar", bizz: "buzz"}
+
+
 ## Contributing
 
 1. Fork it ( http://github.com/cloudfive/pushapi-ruby/fork )
