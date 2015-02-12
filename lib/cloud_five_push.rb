@@ -11,6 +11,15 @@ module CloudFivePush
     @api_key
   end
 
+  @aps_environment = nil
+  def self.aps_environment=(aps_environment)
+    @aps_environment = aps_environment
+  end
+
+  def self.aps_environment
+    @aps_environment
+  end
+
   def self.broadcast!(alert, scheduled_at = nil)
     notification = CloudFivePush::Notification.new
     notification.broadcast = true
@@ -19,7 +28,7 @@ module CloudFivePush
     notification.notify!
   end
 
-  def self.notify!(alert, user_identifers, scheduled_at = nil)
+  def self.notify!(alert, user_identifiers, scheduled_at = nil)
     notification = CloudFivePush::Notification.new
     notification.alert = alert
     notification.user_identifiers = user_identifiers
