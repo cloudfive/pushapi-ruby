@@ -56,6 +56,8 @@ Send a notification with custom json payload
     notification.user_identifiers = 123
     notification.data = {foo: "bar", bizz: "buzz"}
 
+## iOS Specific features
+
 By default, all iOS notifications will be sent through the production APNs.  To use the development service instead:
 
     # set this globally, good for use in a local development server
@@ -66,6 +68,11 @@ By default, all iOS notifications will be sent through the production APNs.  To 
     notification.alert = "testing, testing, 1 2 3"
     notification.aps_environment = :development
 
+You can also set the content-available flag if you have other plugins that rely on it:
+
+    notification = CloudFivePush::Notification.new
+    notification.content_available = 1
+    notification.notify!
 
 
 ## Contributing

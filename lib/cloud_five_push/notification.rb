@@ -1,7 +1,8 @@
 require 'httparty'
 module CloudFivePush
   class Notification
-    attr_accessor :user_identifiers, :alert, :message, :badge, :scheduled_at, :broadcast, :api_key, :data, :aps_environment
+    attr_accessor :user_identifiers, :alert, :message, :badge, :scheduled_at, :broadcast,
+                  :api_key, :data, :aps_environment, :content_available
 
     include HTTParty
     base_uri 'https://push.cloudfiveapp.com'
@@ -52,6 +53,7 @@ module CloudFivePush
       params[:when] = @scheduled_at.iso8601 if @scheduled_at
       params[:data] = @data.to_json if @data
       params[:aps_environment] = @aps_environment.to_s if @aps_environment
+      params[:content_available] = @content_available.to_s if @content_available
 
       if @broadcast
         params[:audience] = "broadcast"
