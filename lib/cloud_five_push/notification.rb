@@ -6,7 +6,7 @@ module CloudFivePush
 
     include HTTParty
     base_uri 'https://push.cloudfiveapp.com'
-    debug_output $stderr
+    # debug_output $stderr
 
     def initialize(api_key=nil)
       @api_key = api_key || CloudFivePush.api_key
