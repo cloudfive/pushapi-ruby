@@ -6,7 +6,7 @@ module CloudFivePush
 
     include HTTParty
     base_uri 'https://push.cloudfiveapp.com'
-    # debug_output $stderr
+    debug_output $stderr
 
     def initialize(api_key=nil)
       @api_key = api_key || CloudFivePush.api_key
@@ -33,6 +33,7 @@ module CloudFivePush
     def user_identifiers=(user_identifiers)
       @user_identifiers = [user_identifiers].flatten
     end
+    alias user_identifier= user_identifiers=
 
     private
 
@@ -42,11 +43,11 @@ module CloudFivePush
 
     def push_params
       params = {
-        api_key: @api_key,
-        alert: @alert,
-        badge: @badge
+        api_key: @api_key
       }
 
+      params[:alert] = @alert if @alert
+      params[:badge] = @badge if @badge
       params[:message] = @message if @message
       params[:when] = @scheduled_at.iso8601 if @scheduled_at
       params[:data] = @data.to_json if @data
