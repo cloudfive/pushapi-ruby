@@ -1,17 +1,19 @@
 require 'httparty'
+
 module CloudFivePush
   class Notification
+    include HTTParty
+
     attr_accessor :user_identifiers, :alert, :message, :badge, :scheduled_at, :broadcast,
                   :api_key, :data, :aps_environment, :content_available
 
-    include HTTParty
     base_uri 'https://push.cloudfiveapp.com'
     # debug_output $stderr
 
-    def initialize(api_key=nil)
+    def initialize(api_key = nil)
       @api_key = api_key || CloudFivePush.api_key
       if @api_key.nil?
-        raise "api_key is required (or set CloudFivePush.api_key)"
+        raise "api_key is required. Pass into initializer or set CloudFivePush.api_key first"
       end
       @broadcast = false
       @user_identifiers = []
@@ -27,7 +29,7 @@ module CloudFivePush
         raise "Can't both broadcast and set user_identifiers"
       end
 
-      self.class.post('/push/notify', body: push_params)
+      self.class.post('/api/push/notify', body: push_params).parsed_response
     end
 
     def user_identifiers=(user_identifiers)
