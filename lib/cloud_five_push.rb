@@ -20,6 +20,15 @@ module CloudFivePush
     @aps_environment
   end
 
+  @dev_mode = false
+  def self.dev_mode=(dev_mode)
+    @dev_mode = dev_mode
+  end
+
+  def self.dev_mode
+    @dev_mode
+  end
+
   def self.broadcast!(alert, scheduled_at = nil)
     notification = CloudFivePush::Notification.new
     notification.broadcast = true
